@@ -9,15 +9,19 @@ import lombok.Setter;
 @Setter
 @Entity
 @EqualsAndHashCode
-public class UserFollow extends CreatedAt{
-    @Id
+public class UserFollow extends CreatedAt {
+    @EmbeddedId
+    private UserFollowIds userFollowIds;
+
+    //관계설정
     @ManyToOne
-    @JoinColumn(name="from_user_id")
+    @MapsId("fromUserId")
+    @JoinColumn(name = "from_user_id")
     private User fromUserId;
 
-    @Id
-    @JoinColumn(name="to_user_id")
     @ManyToOne
+    @MapsId("toUserId")
+    @JoinColumn(name = "to_user_id")
     private User toUserId;
-
 }
+
